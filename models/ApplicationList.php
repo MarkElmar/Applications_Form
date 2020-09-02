@@ -31,7 +31,8 @@ class ApplicationList
         $list = [];
         foreach ($stmt->fetchAll() as $application)
         {
-            $list[$application['id']] = [new Application($application['id'],
+            $list[$application['id']] = [new Application(
+
                 $application['company'],
                 $application['contact'],
                 $application['date'],
@@ -40,7 +41,8 @@ class ApplicationList
                 $application['firstMeeting'],
                 $application['secondMeeting'],
                 $application['rejectionReason'],
-                $application['accepted'])
+                $application['accepted'],
+                $application['id'])
             ];
 
         }

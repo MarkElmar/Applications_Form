@@ -43,6 +43,8 @@ class StudentController
         {
             $student = new Student($row['givenName'], $row['familyName'], $row['fullName'], $studentNumber, $row['id']);
             $_SESSION['student'] = serialize($student);
+
+            header("Location: ./");
         }
 
     }

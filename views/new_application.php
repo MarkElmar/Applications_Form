@@ -1,3 +1,23 @@
+<title>Nieuwe Sollicitatie</title>
+<?php
+if (isset($_POST['submit']))
+{
+    $app = new Application($_POST['company'],
+        $_POST['contact'],
+        $_POST['date'],
+        $_POST['way'],
+        $_POST['dateConfirmation'],
+        $_POST['firstMeeting'],
+        $_POST['secondMeeting'],
+        $_POST['rejectionReason'],
+        $_POST['accepted']
+    );
+
+    $app->newApp();
+
+}
+
+?>
 <!-- Form For New Applications-->
 <form method="post" action="">
     <div class="form-group">
