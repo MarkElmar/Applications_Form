@@ -1,5 +1,5 @@
 <title>Solicitatie Overzicht</title>
-<table class="table-dark table table-responsive">
+<table class="table-dark table table-responsive-md">
     <tr>
         <th>Bedrijfsnaam:</th>
         <th>Contact Persoon:</th>
@@ -18,5 +18,6 @@ foreach ($all_applications as $application)
     echo "<td>" . $application->date . "</td>";
     echo "<td>" . $application->way . "</td>";
     echo "<td>" . $application->accepted . "</td>";
-    echo "<td><a href='./?id=" . $application->getId() . "'> Details</a></td>";
+    echo "<td><a href='./?id=" . $application->getId() . "'>Details</a></td>";
+    echo "</tr>";
 }
