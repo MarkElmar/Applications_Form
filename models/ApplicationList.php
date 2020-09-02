@@ -15,6 +15,7 @@ class ApplicationList
 
     /**
      * @return array|null
+     * Gets all applications from user, makes them a application and puts them in an array
      */
     public function getAllApplications()
     {

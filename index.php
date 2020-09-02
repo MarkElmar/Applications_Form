@@ -25,8 +25,10 @@
     include $_SERVER['DOCUMENT_ROOT'] . '/controllers/ApplicationListController.php';
 
     session_start();
+    // Checks if student is signed in
     if (!isset($_SESSION['student']))
     {
+        // Send then to login page
         $studentController = new StudentController();
         $studentController->getLogin();
         exit();
@@ -36,7 +38,11 @@
         $studentController = new StudentController($student);
     }
 
+
     $applicationController = new ApplicationListController($student->getId());
+    /*Checks if $id is in URL if true get single application
+    else show all applications
+    */
     if (isset($_GET['id']) && !empty($_GET['id']))
     {
         $applicationController->getApplication($_GET['id']);
