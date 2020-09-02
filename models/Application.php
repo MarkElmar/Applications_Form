@@ -47,6 +47,8 @@ class Application
         }
     }
 
+
+    // It updates an older application in the class and in the datebase
     public function save($company, $contact, $date, $way, $dateConfirmation, $firstMeeting,
                          $secondMeeting, $rejectionReason, $accepted)
     {
@@ -76,6 +78,43 @@ class Application
 
         $stmt->execute($data);
     }
+
+    // Creates a new application in the database
+
+    private function checks($company, $contact, $date, $way, $dateConfirmation, $firstMeeting,
+                            $secondMeeting, $rejectionReason, $accepted)
+    {
+
+
+        $saveCompany = filter_var($company, FILTER_SANITIZE_STRING);
+        $saveContact = filter_var($contact, FILTER_SANITIZE_STRING);
+        $saveDate = date('Y-m-d', strtotime($date));
+        $saveDateConfirmation = date('Y-m-d', strtotime($dateConfirmation));
+        $saveFirstMeeting = date('Y-m-d', strtotime($firstMeeting));
+        $saveSecondMeeting = date('Y-m-d', strtotime($secondMeeting));
+        $saveRejectionReason = filter_var($rejectionReason, FILTER_SANITIZE_STRING);
+        $accepted = ($accepted == 'true') ? 1 : 0;
+
+        $this->company = $saveCompany;
+        $this->contact = $saveContact;
+        $this->date = $saveDate;
+        $this->way = $way;
+        $this->dateConfirmation = $saveDateConfirmation;
+        $this->firstMeeting = $saveFirstMeeting;
+        $this->secondMeeting = $saveSecondMeeting;
+        $this->rejectionReason = $saveRejectionReason;
+        $this->accepted = $accepted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    // Makes it more Injection Proof
 
     public function newApp()
     {
@@ -111,38 +150,5 @@ class Application
         $stmt->execute($data);
 
         header("Location: ./?newAppSuccess");
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    private function checks($company, $contact, $date, $way, $dateConfirmation, $firstMeeting,
-                            $secondMeeting, $rejectionReason, $accepted)
-    {
-        // Makes it more Injection Proof
-
-        $saveCompany = filter_var($company, FILTER_SANITIZE_STRING);
-        $saveContact = filter_var($contact, FILTER_SANITIZE_STRING);
-        $saveDate = date('Y-m-d', strtotime($date));
-        $saveDateConfirmation = date('Y-m-d', strtotime($dateConfirmation));
-        $saveFirstMeeting = date('Y-m-d', strtotime($firstMeeting));
-        $saveSecondMeeting = date('Y-m-d', strtotime($secondMeeting));
-        $saveRejectionReason = filter_var($rejectionReason, FILTER_SANITIZE_STRING);
-        $accepted = ($accepted == 'true') ? 1 : 0;
-
-        $this->company = $saveCompany;
-        $this->contact = $saveContact;
-        $this->date = $saveDate;
-        $this->way = $way;
-        $this->dateConfirmation = $saveDateConfirmation;
-        $this->firstMeeting = $saveFirstMeeting;
-        $this->secondMeeting = $saveSecondMeeting;
-        $this->rejectionReason = $saveRejectionReason;
-        $this->accepted = $accepted;
     }
 }
